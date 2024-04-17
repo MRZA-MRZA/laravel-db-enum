@@ -17,7 +17,7 @@ trait EnumValue
           'enum_'.config('database.connections.' . (new static)->connection . '.prefix') . (new static)->getTable()
           , 60, function() {
             $fields = DB::connection((new static)->connection)->select(
-                DB::raw("SHOW COLUMNS FROM " . config('database.connections.' . (new static)->connection . '.prefix') . (new static)->getTable())
+                DB::raw("SHOW COLUMNS FROM " . config('database.connections.' . (new static)->connection . '.prefix') . (new static)->getTable())->getValue(DB::connection()->getQueryGrammar())
             );
             $result = [];
             foreach ($fields as $field) {
